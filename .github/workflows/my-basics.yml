@@ -4,6 +4,10 @@
 # Copyleft (c) by alexxx09097
 #--------------------------------
 name: My-GitHub-Action-Basics
+permissions: 
+env:
+  APPLICATION_NAME   : "MyFlask"
+  DEPLOY_PACKAGE_NAME: "flask-deploy-ver-${{ github.sha }}"
 
 on:
   push:
@@ -17,6 +21,12 @@ jobs:
     steps:
       - name: Print Hello Message in Testing
         run : echo "Hello world from Testing job"
+
+      - name: Execute few commands
+        run: |
+          echo "Hello Message1"
+          echo "Hello Message2"
+          echo "Application name: ${{ env.APPLICATION_NAME }}"
     
 
   my_deploy:
@@ -26,5 +36,8 @@ jobs:
     steps:
       - name: Print Hello Message in Deploy
         run : echo "Hello world from Deploy job"
+
+      - name: Printing Deployment Package
+        run: echo "Deploy package name is: ${{ env.DEPLOY_PACKAGE_NAME }}"
 
         
